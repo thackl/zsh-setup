@@ -7,22 +7,22 @@ local current_dir='%{$fg[white]%}%37<..<%B%{$fg[magenta]%}%~%<<%u'
 
 #ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg[yellow]%}‹"
 #ZSH_THEME_GIT_PROMPT_SUFFIX="› %{$reset_color%}"
-ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg[yellow]%}"
+ZSH_THEME_GIT_PROMPT_PREFIX="⏧ %{$fg[yellow]%}"
 ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%}"
 local git_branch='$(git_prompt_info)'
 
 #local curr_time="%{$fg[red]%}%B⌚ %b%{$fg[red]%}%D{%H:%M:%S}"
-local curr_time="%{$fg[green]%}%D{%H:%M:%S}"
+local curr_time="⌚ %{$fg[green]%}%D{%H:%M:%S}"
 
 #%{$reset_color%
 #PROMPT="${BG[235]}${user_host}:${current_dir} ${git_branch}
-PROMPT="${user_host}${current_dir}%{$reset_color%}
+PROMPT="[${user_host}${current_dir}%{$reset_color%}
 "
 [[ `id -u` = "0" ]] && PROMPT="${PROMPT}%{$fg[red]%}"
-PROMPT="${PROMPT}$%b "
+PROMPT="${PROMPT}%b"
 [[ `id -u` = "0" ]] && PROMPT="${PROMPT}%{$reset_color%}"
 
-RPROMPT="%{$(echotc UP 1)%} ${return_code} ${git_branch} ${curr_time}""%{$(echotc DO 1)%}%{$reset_color%}"
+RPROMPT="%{$(echotc UP 1)%} ${return_code} ${git_branch} ${curr_time}%{$reset_color%}]%{$(echotc DO 1)%}"
 
 
 # MODE_INDICATOR="%{$fg_bold[yellow]%}❮%{$reset_color%}%{$fg[yellow]%}❮❮%{$reset_color%}"
