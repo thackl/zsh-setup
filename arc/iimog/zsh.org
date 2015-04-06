@@ -1,0 +1,54 @@
+Why zsh makes you more productive
+* Theming
+** prompt
+** syntax highlighting
+* Typo correction
+evho "Hello zsh!"
+* Autocompletion
+** in-place updates
+** case insensitive
+** fuzzy matching
+** path expansion
+*** cd /u/lo/sh
+** program specific (incl description)
+*** git
+*** apt-get
+*** task
+*** ssh
+** (cycle through options)
+unset noautomenu
+* Directory stack
+** pushd popd
+** d
+** cd -5
+** bookmarks
+*** jump
+*** showmarks
+*** bookmark
+** path replacement
+*** cd /usr/local/bin
+*** cd bin share
+* Line editor
+** vi like (or emecs like)
+** word borders (vi style)
+** full editor via ESC
+* Aliases
+** normal
+** global -g
+** suffix -s
+* History (configurable)
+** shared history
+** history-substring-search
+* Misc
+** Warns when jobs are running CTRL-D
+** Extended globbing **/
+** Variable editing
+vared $PATH
+** programmable file renaming
+*** zmv '(*).txt' '$1.html'
+** output redirect to multiple files
+** Terminal title
+** Multi line history
+** And probably many more!
+*** Use it and share your experience!
+*** chsh right now ;-)
