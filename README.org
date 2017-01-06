@@ -1,0 +1,30 @@
+*** Deploy
+#+BEGIN_SRC 
+sudo apt-get install zsh 
+# or http://www.zsh.org/ + configure prefix + make
+
+git clone https://github.com/thackl/zsh-setup.git
+cd zsh-setup
+./install.sh
+
+# make zsh default login shell
+chsh -s /bin/zsh  # or path to local installation
+#+END_SRC
+
+*** zsh login shell on remote without sudo 
+i.e. without permission to run chsh, and with designated ssh key. Assuming
+access via ssh and other shell (i.e. bash), and zsh installed on remote.
+
+#+BEGIN_SRC 
+LOGIN=user@server  # ssh login
+LOGIN=mit
+cat zsh-exec | ssh $LOGIN 'cat - >> ~/.zsh-exec'
+
+cd ~/.ssh/
+ssh-keygen -P '' -f id_rsa-zsh
+(echo -n 'command=". ~/.zsh-exec" '; 
+  cat id_rsa-zsh.pub) | ssh $LOGIN 'cat - >> ~/.ssh/authorized_keys'
+
+# connect with the new key - should run zsh
+ssh -i id_rsa-zsh $LOGIN
+#+END_SRC
