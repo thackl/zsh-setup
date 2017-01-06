@@ -8,7 +8,8 @@ cd zsh-setup
 ./install.sh
 
 # make zsh default login shell
-chsh -s /bin/zsh  # or path to local installation
+chsh -s /bin/zsh  # or path to local installation, see below
+                  # for workaround if chsh rights are missing
 #+END_SRC
 
 *** zsh login shell on remote without sudo 
@@ -21,7 +22,7 @@ way I could find in case setting login shell to zsh directly is not permitted.
 
 #+BEGIN_SRC 
 LOGIN=user@server  # ssh login
-LOGIN=mit
+
 cat zsh-exec | ssh $LOGIN 'cat - >> ~/.zsh-exec'
 
 cd ~/.ssh/
