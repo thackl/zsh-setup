@@ -1,7 +1,3 @@
-THIS=$(readlink -f ${ZDOTDIR-~}"/.zshrc")
-CONFDIR="$( cd "$( dirname "$THIS" )" && pwd )"
-export CONFDIR
-
 zstyle ":completion:*:commands" rehash 1
 setopt nobeep                  # i hate beeps
 setopt noautomenu              # don't cycle completion
@@ -24,12 +20,14 @@ setopt interactivecomments     # escape commands so i can use them later
 setopt printexitvalue          # alert me if something's failed
 
 # history related stuff.
-export HISTSIZE=100000
-export SAVEHIST=100000
+export HISTSIZE=10000000
+export SAVEHIST=10000000
 export HISTFILE=~/.zsh_history
 setopt hist_ignore_dups        # ignore same commands run twice+
 setopt appendhistory           # don't overwrite history
 setopt share_history
+unsetopt histignorespace
+setopt histreduceblanks
 
 # If running interactively, then:
 if [[ -o interactive ]]; then
@@ -67,61 +65,15 @@ if [[ -o interactive ]]; then
 	bindkey '^k' kill-line
 	bindkey "^[OH" beginning-of-line
 	bindkey "^[OF" end-of-line
+
+        # enable history-substring-search
+        # bind UP and DOWN arrow keys
+        bindkey '^[[A' history-substring-search-up
+        bindkey '^[[B' history-substring-search-down
+
+        # Allow to list archive contents via less and use syntax highlighting
+        export LESS="-R"
+        eval $(lesspipe)
+
+        autoload -U colors && colors
 fi
-
-
-autoload -U colors && colors
-
-# PATH
-[[ -d "$HOME/bin" ]] && PATH="$PATH:$HOME/bin"
-[[ -d "$HOME/build/bin" ]] && PATH="$PATH:$HOME/build/bin"
-PATH=$PATH:/sbin:/usr/sbin:/usr/local/sbin
-export PATH
-
-test -s ~/.bash_path && . ~/.bash_path || true
-
-# Aliases
-test -s ~/.alias && . ~/.alias || true
-test -s ~/.bash_aliases && . ~/.bash_aliases || true
-
-# perl5lib
-if [ -f ~/.perl5lib ]; then
-	. ~/.perl5lib
-fi
-
-# german keyboard layout
-[[ -x /usr/bin/setxkbmap ]] && setxkbmap de
-
-# Use more appealing colors
-if [ -f ~/.dircolors ]; then
-   eval `dircolors $HOME/.dircolors`
-else
-   eval `dircolors`
-fi
-
-
-
-[[ -f "$HOME/.zsh_local" ]] && . $HOME/.zsh_local
-
-# [ -f "$CONFDIR/start-agent" ] && source $CONFDIR/start-agent
-
-if [ -f "${HOME}/.gpg-agent-info" ]; then
-	source  "${HOME}/.gpg-agent-info"
-        export GPG_AGENT_INFO
-        export SSH_AUTH_SOCK
-fi
-
-if [ -S "$SSH_AUTH_SOCK" ]; then
-	echo ""
-else
-	eval $( gpg-agent --daemon --enable-ssh-support --write-env-file "${HOME}/.gpg-agent-info")
-fi
-
-# Allow to list archive contents via less and use syntax highlighting
-export LESS="-R"
-eval $(lesspipe)
-
-# enable history-substring-search
-# bind UP and DOWN arrow keys
-bindkey '^[[A' history-substring-search-up
-bindkey '^[[B' history-substring-search-down
