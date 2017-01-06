@@ -1,53 +1,29 @@
-# Path to your oh-my-zsh installation.
-export ZSH=$HOME/.oh-my-zsh
+# Path to oh-my-zsh
+export ZSH=$HOME/.oh-my-zsh 
 
-# Set name of the theme to load.
-# Look in ~/.oh-my-zsh/themes/
-# Optionally, if you set this to "random", it'll load a random theme each
-# time that oh-my-zsh is loaded.
-ZSH_THEME="dumps"
-# ZSH_THEME="avit"
+# themes [$ZSH/themes and $ZSH_CUSTOM]
+ZSH_THEME="dumps" 
+# custom stuff [$ZSH/custom]
+# ZSH_CUSTOM=$ZSH/custom 
 
-# Uncomment the following line to use case-sensitive completion.
-# CASE_SENSITIVE="true"
+# formats: "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
+HIST_STAMPS="yyyy-mm-dd" 
 
-# Uncomment the following line to disable bi-weekly auto-update checks.
-# DISABLE_AUTO_UPDATE="true"
+# from $ZSH/plugins/ and $ZSH_CUSTOM/plugins/
+plugins=(git colored-man-pages command-not-found zsh-syntax-highlighting zsh-history-substring-search)
 
-# Uncomment the following line to change how often to auto-update (in days).
-# export UPDATE_ZSH_DAYS=13
-
-# Uncomment the following line to disable colors in ls.
-# DISABLE_LS_COLORS="true"
-
-# Uncomment the following line to disable auto-setting terminal title.
-# DISABLE_AUTO_TITLE="true"
-
-# Uncomment the following line to enable command auto-correction.
-ENABLE_CORRECTION="true"
-
-# Uncomment the following line to display red dots whilst waiting for completion.
-# COMPLETION_WAITING_DOTS="true"
-
-# Uncomment the following line if you want to disable marking untracked files
-# under VCS as dirty. This makes repository status check for large repositories
-# much, much faster.
-# DISABLE_UNTRACKED_FILES_DIRTY="true"
-
-# Uncomment the following line if you want to change the command execution time
-# stamp shown in the history command output.
-# The optional three formats: "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
-# HIST_STAMPS="mm/dd/yyyy"
-
-# Would you like to use another custom folder than $ZSH/custom?
-# ZSH_CUSTOM=/path/to/new-custom-folder
-
-# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
-# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-# Add wisely, as too many plugins slow down shell startup.
-plugins=(git pass catimg colored-man command-not-found zshmarks zsh-syntax-highlighting zsh-history-substring-search)
-
+## also loads $ZSH_CUSTOM/*.zsh
 source $ZSH/oh-my-zsh.sh 
-## will also load custom/dumps.zsh
-## customize in custom/dumps.zsh
+
+## unhash stuff that gets automatically added to named dirs (user homes etc.)
+## only explicit "hash" + "per item unhash" works, otherwise allusersadded = 0
+## in hashnameddir.c will not be set to 1, and stuff will magically be rehashed
+hash -df # fully hash => allusersadded = 1
+for DIR in $(hash -d); do # fully clear keeping allusersadded = 1
+  unhash -d ${DIR%=*} 
+done;
+
+for CFG in ~/.path ~/.alias ~/.perl5lib ~/.python2lib; do
+    [ -f "$CFG" ] && . "$CFG" || true
+done;
+
