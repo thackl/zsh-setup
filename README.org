@@ -15,6 +15,10 @@ chsh -s /bin/zsh  # or path to local installation
 i.e. without permission to run chsh, and with designated ssh key. Assuming
 access via ssh and other shell (i.e. bash), and zsh installed on remote.
 
+This still first logs in with default login shell (probably bash), so there's
+overhead, and it also loads .bashrc, .bash_path, etc. However, it's the cleanest
+way I could find in case setting login shell to zsh directly is not permitted.
+
 #+BEGIN_SRC 
 LOGIN=user@server  # ssh login
 LOGIN=mit
@@ -27,4 +31,14 @@ ssh-keygen -P '' -f id_rsa-zsh
 
 # connect with the new key - should run zsh
 ssh -i id_rsa-zsh $LOGIN
+#+END_SRC
+
+To make things a little faster and skip some of the .bashrc loading, add
+#+BEGIN_SRC 
+# skip .bashrc if going for zsh
+[ "$SSH_ORIGINAL_COMMAND" == "zsh-fast" ] && { return; }
+#+END_SRC
+to start of .bashrc, and run
+#+BEGIN_SRC 
+ssh -i id_rsa-zsh -t $LOGIN zsh-fast  # probably want to alias this
 #+END_SRC
