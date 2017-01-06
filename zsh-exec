@@ -1,0 +1,8 @@
+ZSH=/home/thackl/software/zsh/bin/zsh
+if [ -z "$ZSH_VERSION" ] && [ -f $ZSH ]; then
+  echo -n Running zsh shell [$ZSH] 1>&2;
+  export SHELL=$ZSH
+  exec "$SHELL" -l
+else
+  echo Failed to initialize zsh shell 1>&2;
+fi;
