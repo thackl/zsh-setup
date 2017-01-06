@@ -31,7 +31,6 @@ done;
 # - git_prompt_info :: http://marc-abramowitz.com/archives/2012/04/10/fix-for-oh-my-zsh-git-svn-prompt-slowness/
 # overwrite git_prompt_info() in oh-my-zsh/lib/git.zsh to only execute on non-remote drive
 function git_prompt_info() {
-    echo hi
     local ref
     ## thackl
     if [[ `stat -f -L -c %T $PWD` == *fuseblk* ]]; then
