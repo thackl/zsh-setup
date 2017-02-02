@@ -15,6 +15,22 @@ plugins=(git colored-man-pages command-not-found zsh-syntax-highlighting zsh-his
 ## also loads $ZSH_CUSTOM/*.zsh
 source $ZSH/oh-my-zsh.sh
 
+## add $PWD to history
+# based on http://stackoverflow.com/questions/2824051/saving-current-directory-to-zsh-history
+#function _-accept-line() {
+#    [[ -z "${BUFFER}" ]] || [[ "${BUFFER}" =~ "### ${(q)PWD}\$" ]] || BUFFER="${BUFFER} ### ${PWD}"
+#    zle .accept-line
+#}
+#zle -N accept-line _-accept-line
+
+function zshaddhistory() {
+    if [[ "${1%%$'\n'}" =~ "### ${(q)PWD}\$" ]]; then
+        print -sr "${1%%$'\n'}"
+    else
+        print -sr "${1%%$'\n'}   ### ${PWD}"
+    fi
+    fc -p
+}
 
 ## fix overcrowed hashed named directory
 # unhash stuff that gets automatically added to named dirs (user homes etc.)
