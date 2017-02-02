@@ -17,17 +17,14 @@ source $ZSH/oh-my-zsh.sh
 
 ## add $PWD to history
 # based on http://stackoverflow.com/questions/2824051/saving-current-directory-to-zsh-history
-#function _-accept-line() {
-#    [[ -z "${BUFFER}" ]] || [[ "${BUFFER}" =~ "### ${(q)PWD}\$" ]] || BUFFER="${BUFFER} ### ${PWD}"
-#    zle .accept-line
-#}
-#zle -N accept-line _-accept-line
-
+# but adds a new line before every command with respective $PWD
 function zshaddhistory() {
-    if [[ "${1%%$'\n'}" =~ "### ${(q)PWD}\$" ]]; then
+    if [[ "$1" =~ "^#cd ${(q)PWD}\
+" ]]; then
         print -sr "${1%%$'\n'}"
     else
-        print -sr "${1%%$'\n'}   ### ${PWD}"
+        print -s "#cd ${PWD}
+${1%%$'\n'}"
     fi
     fc -p
 }
