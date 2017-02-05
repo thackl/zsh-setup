@@ -10,7 +10,7 @@ ZSH_THEME="dumps"
 HIST_STAMPS="yyyy-mm-dd"
 
 # from $ZSH/plugins/ and $ZSH_CUSTOM/plugins/
-plugins=(git colored-man-pages command-not-found zsh-syntax-highlighting zsh-history-substring-search)
+plugins=(git colored-man-pages command-not-found history-substring-search zsh-syntax-highlighting)
 
 ## also loads $ZSH_CUSTOM/*.zsh
 source $ZSH/oh-my-zsh.sh
