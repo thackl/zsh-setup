@@ -23,7 +23,7 @@ function zshaddhistory() {
 " ]]; then
         print -sr "${1%%$'\n'}"
     else
-        print -s "#cd ${PWD}
+        print -sr "#cd ${PWD}
 ${1%%$'\n'}"
     fi
     fc -p
