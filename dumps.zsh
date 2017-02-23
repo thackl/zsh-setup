@@ -71,6 +71,13 @@ if [[ -o interactive ]]; then
         bindkey '^[[A' history-substring-search-up
         bindkey '^[[B' history-substring-search-down
 
+        # Use more appealing colors, necessary on engaging
+        if [ -f ~/.dircolors ]; then
+            eval `dircolors $HOME/.dircolors`
+        else
+            eval `dircolors`
+        fi
+
         # Allow to list archive contents via less and use syntax highlighting
         export LESS="-R"
         eval $(lesspipe)
