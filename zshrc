@@ -10,7 +10,7 @@ ZSH_THEME="dumps"
 HIST_STAMPS="yyyy-mm-dd"
 
 # from $ZSH/plugins/ and $ZSH_CUSTOM/plugins/
-plugins=(git colored-man-pages command-not-found history-substring-search zsh-syntax-highlighting)
+plugins=(git colored-man-pages command-not-found history-substring-search zsh-syntax-highlighting biozsh)
 
 ## also loads $ZSH_CUSTOM/*.zsh
 source $ZSH/oh-my-zsh.sh
@@ -60,6 +60,6 @@ function git_prompt_info() {
 
 
 ## load some local configs
-for CFG in ~/.path ~/.alias ~/.perl5lib ~/.python2lib; do
+for CFG in ~/.path ~/.alias ~/.perl5lib; do
     [ -f "$CFG" ] && . "$CFG" || true
 done;

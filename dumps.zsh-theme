@@ -5,11 +5,11 @@ local return_code="%B%(?..%{$fg[red]%}↵%?%{$reset_color%})%b"
 local user_host='%{$fg[cyan]%}%n@%m%{$fg[white]%}:'
 local current_dir='%{$fg[white]%}%40<..<%B%{$fg[magenta]%}%~%<<%u'
 
-ZSH_THEME_GIT_PROMPT_PREFIX="⏧ %{$fg[yellow]%}"
+ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg[yellow]%}"
 ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%}"
 local git_branch='$(git_prompt_info)'
 
-local curr_time="⌚ %{$fg[green]%}%D{%H:%M:%S}"
+local curr_time="%{$fg[green]%}%D{%H:%M:%S}"
 
 PROMPT="[${user_host}${current_dir}%{$reset_color%}
 "
