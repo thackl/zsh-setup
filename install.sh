@@ -7,11 +7,11 @@ hash zsh || { echo "Make sure zsh is installed and in PATH" 1>&2; exit; }
 
 # download oh-my-zsh
 if [ ! -d "$OMZ" ]; then
-    git clone git://github.com/robbyrussell/oh-my-zsh.git $OMZ
+    git clone https://github.com/ohmyzsh/ohmyzsh.git $OMZ
 fi
 
 if [ ! -d "$SYN" ]; then
-    git clone git://github.com/zsh-users/zsh-syntax-highlighting.git $SYN
+    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $SYN
 fi
 
 # deploy confs
